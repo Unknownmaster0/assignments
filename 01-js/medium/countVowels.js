@@ -5,8 +5,28 @@
   Once you've implemented the logic, test your code by running
 */
 
+function isVowels(ch) {
+  return (
+    ch === "A" ||
+    ch === "a" ||
+    ch === "e" ||
+    ch === "E" ||
+    ch === "i" ||
+    ch === "I" ||
+    ch === "o" ||
+    ch === "O" ||
+    ch === "u" ||
+    ch === "U"
+  );
+}
+
 function countVowels(str) {
-    // Your code here
+  // Your code here
+  let cnt = 0;
+  for (let char of str) {
+    if (isVowels(char)) cnt++;
+  }
+  return cnt;
 }
 
 module.exports = countVowels;
