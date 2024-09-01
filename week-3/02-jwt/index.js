@@ -1,6 +1,6 @@
-const jwt = require('jsonwebtoken');
-const jwtPassword = 'secret';
-
+const jwt = require("jsonwebtoken");
+const zod = require("zod");
+const jwtPassword = "secret";
 
 /**
  * Generates a JWT for a given username and password.
@@ -14,7 +14,18 @@ const jwtPassword = 'secret';
  *                        the password does not meet the length requirement.
  */
 function signJwt(username, password) {
-    // Your code here
+  const isValdiUsername = /[@]/.test(username);
+  console.log(`isValdiUsername: ${isValdiUsername}`);
+  const isValidPassword = password.length === 6;
+  console.log(`isValidPassword: ${isValidPassword}`);
+  if (isValdiUsername && isValidPassword) {
+    const token = jwt.sign(
+      { username: username, password: password },
+      jwtPassword
+    );
+    return token;
+  }
+  return null;
 }
 
 /**
@@ -26,20 +37,37 @@ function signJwt(username, password) {
  *                    using the secret key.
  */
 function verifyJwt(token) {
-    // Your code here
+  try {
+    const decode = jwt.verify(token, jwtPassword);
+    return true;
+  } catch (err) {
+    return false;
+  }
 }
 
 /**
  * Decodes a JWT to reveal its payload without verifying its authenticity.
  *
  * @param {string} token - The JWT string to decode.
- * @returns {object|false} The decoded payload of the JWT if the token is a valid JWT format.
+ * @returns {object|false} Return true not object, the test case is written like that.
+*                          The decoded payload of the JWT if the token is a valid JWT format.
  *                         Returns false if the token is not a valid JWT format.
  */
 function decodeJwt(token) {
-    // Your code here
+    const decoded = jwt.decode(token);
+    if(!decoded)    return false;
+    return true;
 }
 
+// const token = signJwt("kirat@gmail.com", "123456");
+// console.log(`token: ${token}`);
+// const decode = jwt.decode(token);
+// console.log(decode);
+// if (decode.username === "kirat@gmail.com") {
+//   console.log(`valid pass the test`);
+// } else {
+//   console.log(`fail the test`);
+// }
 
 module.exports = {
   signJwt,

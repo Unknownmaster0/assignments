@@ -41,4 +41,6 @@ app.all('*', (req, res) => {
     res.status(404).send('Route not found');
 });
 
+app.listen(8000);
+
 module.exports = app;

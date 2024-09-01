@@ -12,10 +12,59 @@
     - For any other route not defined in the server return 404
     Testing the server - run `npm run test-fileServer` command in terminal
  */
-const express = require('express');
-const fs = require('fs');
-const path = require('path');
+const express = require("express");
+const fs = require("fs");
+const path = require("path");
 const app = express();
+/*
+const filesArr = [];
 
+const directoryPath = "./files/";
+
+function listAllFiles(directoryPath) {
+  try {
+    fs.readdir(directoryPath, "utf-8", (err, files) => {
+      if (err) throw err;
+      files.forEach((f) => {
+        filesArr.push(f);
+      });
+    });
+  } catch (err) {
+    console.error(`error: ${err}`);
+  }
+}
+listAllFiles("./files/");
+app.get("/files", (req, res) => {
+  // show all the files inside this directory.
+  // listAllFiles(directoryPath);
+  res.json(filesArr);
+});
+*/
+
+app.get("/files", (req, res) => {
+  // show all the files inside this directory.
+  fs.readdir("./files/", "utf-8", (err, files) => {
+    if (err) res.status(500).json(`Not found such directory`);
+    res.json(files);
+  });
+});
+
+app.get("/files/:filename", (req, res) => {
+  // show all the files inside this directory.
+  const file = req.params.filename;
+  fs.readFile(`./files/${file}`, "utf-8", (err, data) => {
+    if (err) res.status(500).json(`Not found such fileName`);
+    res.json({
+      file,
+      data,
+    });
+  });
+});
+
+app.get("*", (req, res) => {
+  res.status(404).json(`Not valid route`);
+});
+
+app.listen(3000);
 
 module.exports = app;
