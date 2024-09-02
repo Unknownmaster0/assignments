@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 // Connect to MongoDB
 mongoose.connect(
-  "mongodb+srv://trySingh:sa123@try-clustor0.59gvu.mongodb.net/selling-db-with-jwt"
+  "write your own mogodb URL here"
 );
 
 // Define schemas
