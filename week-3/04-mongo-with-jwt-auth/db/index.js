@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
 
 // Connect to MongoDB
-mongoose.connect(
-  "mongodb+srv://trySingh:sa123@try-clustor0.59gvu.mongodb.net/selling-db-with-jwt"
-);
+// process.env.MONGO_DB = "mongodb+srv://trySingh:sa123@try-clustor0.59gvu.mongodb.net/selling-db-with-jwt"
+mongoose.connect(process.env.MONGO_DB);
 
 // Define schemas
 const AdminSchema = new mongoose.Schema({
