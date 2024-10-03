@@ -3,7 +3,7 @@ module.exports = {
     preset: 'ts-jest',
     testEnvironment: 'node',
     // Optionally, set up paths to match your project structure
-    roots: ['<rootDir>/src'],
+    roots: [`./src`],
     // Transform settings if you have custom needs, but this is optional since ts-jest is preset
     transform: {
       '^.+\\.ts$': 'ts-jest',
